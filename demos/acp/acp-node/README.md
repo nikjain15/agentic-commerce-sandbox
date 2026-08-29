@@ -349,7 +349,7 @@ const session: CheckoutSession = await acp.checkoutSessions.create(params);
 
 ## Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+Contributions are welcome! Please read our [contributor guidance](../../../AGENTS.md) for details.
 
 ## License
 

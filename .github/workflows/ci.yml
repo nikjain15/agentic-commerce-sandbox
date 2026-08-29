@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  docs:
+    name: Relative links resolve
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      # Offline by design. An external link checker goes red when somebody
+      # else's site is down, which teaches people to ignore the build; this
+      # only follows links whose target is inside the repository, so every
+      # failure is our own broken cross-reference.
+      - name: Check relative links
+        run: python3 scripts/check_links.py
